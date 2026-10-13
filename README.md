@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marriage Cards
 
-## Getting Started
+Digital wedding invitations: professional templates, a Canva-style editor, personal guest links and PDF download.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router, TypeScript) · Tailwind v4 · Konva (canvas editor) · Zustand · MongoDB (Mongoose) · Firebase Auth · jsPDF · Framer Motion
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local      # then fill it in (see below)
+npm run dev                     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.local` (already created for local dev):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | What |
+|---|---|
+| `MONGODB_URI` | Local `mongodb://127.0.0.1:27017/marriage-cards` or an Atlas URI |
+| `NEXT_PUBLIC_FIREBASE_API_KEY`, `_AUTH_DOMAIN`, `_PROJECT_ID`, `_APP_ID` | Firebase console → Project settings → Web app. Enable **Google** and **Email/Password** under Authentication |
+| `NEXT_PUBLIC_SITE_URL` | Your public URL (canonical links, sitemap, link previews) |
+| `ADMIN_EMAILS` | Comma-separated emails allowed into **/admin** (must be a *verified* Firebase email, e.g. your Gmail). `dev@example.com` is the demo user |
+| `AUTH_DEV_BYPASS`, `NEXT_PUBLIC_AUTH_DEV_BYPASS` | **Dev only**: shows a "Continue as demo user" button when Firebase isn't configured. Ignored when `NODE_ENV=production`. Delete once Firebase is set up |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The server verifies Firebase ID tokens itself (no service account needed — only the project id).
 
-## Learn More
+## How it works
 
-To learn more about Next.js, take a look at the following resources:
+- A card is **JSON**: `pages[] → layers[]` (text, shape, ornament, image). Templates and user designs share this model (`src/lib/design/types.ts`), so one editor serves both "pick a template" and "design from scratch".
+- **Templates** are code in `src/lib/templates/*.ts` (one file per template, registered in `index.ts`). Decorative art is procedurally generated vector paths (`src/lib/design/ornaments.ts`) — all original, no stock assets.
+- **Viewer** (`/c/[slug]`) renders pages to images in the browser and shows them as a flip card, a scrolling story, or a single image — chosen by the card's owner.
+- **Guest names:** put `{to}` in any text layer (Text → *Guest name*). `?to=Sarah+Khan` fills it. A card with no `{to}` ignores `?to=` entirely, and layers with `{to}` are hidden when no name is given. Names are sanitised (letters/digits/few punctuation, 40 chars).
+- **Privacy/SEO:** marketing, template and category pages are indexed (see `sitemap.ts`, JSON-LD). Published cards are `noindex` (they contain venues/dates) but still produce WhatsApp/Facebook link previews.
+- Images and link previews are stored in MongoDB and served from `/api/media/[id]`. Swap for S3/Cloudinary later if traffic grows.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Guest replies (RSVP)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Optional and simple: a guest taps **Will you join us?** on the card and picks *I'll be there* (name, phone, how many people) or *Can't make it* (name). Owners see the live list at **My cards → "N coming"** (`/guests/[id]`): totals, search, remove, CSV export. Replies can be switched off per card (Details tab). Spam protection: per-device rate limit, honeypot field, phone/name validation, per-card cap.
 
-## Deploy on Vercel
+## Envelope intro & QR codes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- The animated envelope (8 colours) opens before the card; turn it on/off in the editor's *Details* tab.
+- QR codes: **Elements → QR code** adds a vector QR of the card link onto the page (prints crisp on the PDF); the share dialog also offers a PNG download. If you rename the link, add the QR again.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Admin panel (`/admin`)
+
+Only emails listed in `ADMIN_EMAILS` can open it. Overview (users, cards, views, replies, storage, 30-day chart, top templates/cards), **Users** (search, suspend/reinstate — unpublishes their cards), **Cards** (take down / restore / delete any card), **Audit log** (account, card, reply, report and moderation events with actor/time/IP) and **Reports** (cards flagged by visitors via the "Report" link). Suspended users are blocked on their next request.
+
+## Template tooling (dev only)
+
+```bash
+node scripts/shot.mjs <slug> <page> <scale> ["Guest Name"]   # screenshot a template page → .shots/
+node scripts/gen-thumbs.mjs [slug]                           # regenerate public/templates/*.jpg (needs dev server)
+```
+
+After adding/editing a template: register it in `src/lib/templates/index.ts`, then run `gen-thumbs`.
+`/dev/preview` is blocked in production.
+
+## Scripts
+
+`npm run dev` · `npm run build` · `npm start` · `npm run lint`
+
+## Next steps worth considering
+
+RSVP + guest dashboard, phone-number sign-in (Firebase), animated envelope intro, background music, QR code on the PDF, public gallery (opt-in), premium templates / pay-per-share once there's an audience.
