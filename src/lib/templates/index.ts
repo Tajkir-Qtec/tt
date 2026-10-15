@@ -54,6 +54,34 @@ import shaplaRiverBlush from "./shapla-river-blush";
 import southernAfricanWax from "./southern-african-wax";
 import terracottaTemple from "./terracotta-temple";
 import watercolorWildflower from "./watercolor-wildflower";
+import bdAnnaprashanRice from "./bd-annaprashan-rice";
+import bdAqiqahWelcome from "./bd-aqiqah-welcome";
+import bdBiyeBarirChithi from "./bd-biye-barir-chithi";
+import bdBoatRiverBlue from "./bd-boat-river-blue";
+import bdEidMilanMosaic from "./bd-eid-milan-mosaic";
+import bdEngagementRingBangla from "./bd-engagement-ring-bangla";
+import bdFloralWatercolorRose from "./bd-floral-watercolor-rose";
+import bdHijliFlowerPastel from "./bd-hijli-flower-pastel";
+import bdJamdaniIvoryWeave from "./bd-jamdani-ivory-weave";
+import bdMehendiNightGreen from "./bd-mehendi-night-green";
+import bdMinimalBanglaTypography from "./bd-minimal-bangla-typography";
+import bdRajshahiSilkMaroon from "./bd-rajshahi-silk-maroon";
+import bdReceptionChampagneGold from "./bd-reception-champagne-gold";
+import bdRoyalNavyGold from "./bd-royal-navy-gold";
+import bdTerracottaTileGold from "./bd-terracotta-tile-gold";
+import bdWalimaSageGold from "./bd-walima-sage-gold";
+import beachBonfireSunset from "./beach-bonfire-sunset";
+import christmasPartyClassic from "./christmas-party-classic";
+import cozyCabinWinterBrunch from "./cozy-cabin-winter-brunch";
+import graduationCapGold from "./graduation-cap-gold";
+import halloweenMoonlitManor from "./halloween-moonlit-manor";
+import housewarmingKeysHome from "./housewarming-keys-home";
+import kidsDinoAdventure from "./kids-dino-adventure";
+import newYearsEveGoldBlack from "./new-years-eve-gold-black";
+import poolPartySplash from "./pool-party-splash";
+import summerBbqPicnic from "./summer-bbq-picnic";
+import tropicalLuauHibiscus from "./tropical-luau-hibiscus";
+import winterWonderlandParty from "./winter-wonderland-party";
 
 export type { TemplateDef } from "./kit";
 
@@ -113,6 +141,34 @@ const builders: (() => TemplateDef)[] = [
   southernAfricanWax,
   terracottaTemple,
   watercolorWildflower,
+  bdAnnaprashanRice,
+  bdAqiqahWelcome,
+  bdBiyeBarirChithi,
+  bdBoatRiverBlue,
+  bdEidMilanMosaic,
+  bdEngagementRingBangla,
+  bdFloralWatercolorRose,
+  bdHijliFlowerPastel,
+  bdJamdaniIvoryWeave,
+  bdMehendiNightGreen,
+  bdMinimalBanglaTypography,
+  bdRajshahiSilkMaroon,
+  bdReceptionChampagneGold,
+  bdRoyalNavyGold,
+  bdTerracottaTileGold,
+  bdWalimaSageGold,
+  beachBonfireSunset,
+  christmasPartyClassic,
+  cozyCabinWinterBrunch,
+  graduationCapGold,
+  halloweenMoonlitManor,
+  housewarmingKeysHome,
+  kidsDinoAdventure,
+  newYearsEveGoldBlack,
+  poolPartySplash,
+  summerBbqPicnic,
+  tropicalLuauHibiscus,
+  winterWonderlandParty,
 ];
 
 let cache: TemplateDef[] | null = null;

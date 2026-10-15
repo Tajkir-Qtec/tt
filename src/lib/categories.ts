@@ -139,6 +139,48 @@ export const CATEGORY_INFO: Record<string, { label: string; h1: string; intro: s
     intro: "Lanterns, diyas and alpona borders for Eid, iftar, Diwali, Pohela Boishakh and seasonal gatherings.",
     keywords: ["eid invitation card", "diwali party invitation", "iftar invitation template", "pohela boishakh invitation"],
   },
+  ceremony: {
+    label: "Ceremonies",
+    h1: "Ceremony Invitation Templates — Annaprashan, Aqiqah, Engagement & more",
+    intro: "Invitation cards for family ceremonies: baby rice ceremony (অন্নপ্রাশন), Aqiqah, engagement and community gatherings.",
+    keywords: ["annaprashan invitation card", "aqiqah invitation", "ceremony invitation template", "অন্নপ্রাশন কার্ড"],
+  },
+  summer: {
+    label: "Summer & Pool",
+    h1: "Summer & Pool Party Invitation Templates",
+    intro: "Pool parties, luaus, BBQs and beach bonfires — bright, sunny invitations you can share by link.",
+    keywords: ["pool party invitation", "summer party invitation template", "luau invitation", "bbq invitation"],
+  },
+  winter: {
+    label: "Winter",
+    h1: "Winter Party Invitation Templates",
+    intro: "Snowy, cozy and sparkling winter invitations for parties and gatherings.",
+    keywords: ["winter party invitation", "winter wonderland invitation", "snow party invite template"],
+  },
+  holiday: {
+    label: "Holidays",
+    h1: "Holiday Party Invitation Templates — Christmas, New Year, Halloween",
+    intro: "Christmas, New Year's Eve, Halloween and seasonal party invitations, ready to edit and share.",
+    keywords: ["christmas party invitation", "new years eve party invitation", "halloween party invitation template"],
+  },
+  kids: {
+    label: "Kids",
+    h1: "Kids Birthday Invitation Templates",
+    intro: "Playful, colourful invitations for children's birthday parties.",
+    keywords: ["kids birthday invitation", "dinosaur birthday invitation", "children party invite template"],
+  },
+  graduation: {
+    label: "Graduation",
+    h1: "Graduation Party Invitation Templates",
+    intro: "Celebrate the grad with a stylish digital invitation.",
+    keywords: ["graduation party invitation", "graduation announcement template", "grad party invite"],
+  },
+  housewarming: {
+    label: "Housewarming",
+    h1: "Housewarming Invitation Templates",
+    intro: "Warm, welcoming invitations for your new home celebration.",
+    keywords: ["housewarming invitation", "new home party invite template", "gruhapravesh invitation"],
+  },
 };
 
 export function allCategories(): { slug: string; count: number }[] {
