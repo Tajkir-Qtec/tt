@@ -2,7 +2,7 @@
 
 Digital wedding invitations: professional templates, a Canva-style editor, personal guest links and PDF download.
 
-**Templates:** 83 (weddings across Bengali, South Asian, Islamic, Chinese, Persian, Moroccan, Greek, African and modern styles, plus birthday, baby shower, bridal shower, engagement, anniversary, Eid, Diwali, Boishakh and dinner-party designs).
+**Templates:** 103 (weddings across Bengali, South Asian, Islamic, Chinese, Persian, Moroccan, Greek, African and modern styles, plus birthday, baby shower, bridal shower, engagement, anniversary, Eid, Diwali, Boishakh and dinner-party designs).
 
 **Stack:** Next.js 16 (App Router, TypeScript) · Tailwind v4 · Konva (canvas editor) · Zustand · MongoDB (Mongoose) · Firebase Auth · jsPDF · Framer Motion
 

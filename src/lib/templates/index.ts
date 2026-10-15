@@ -82,6 +82,26 @@ import poolPartySplash from "./pool-party-splash";
 import summerBbqPicnic from "./summer-bbq-picnic";
 import tropicalLuauHibiscus from "./tropical-luau-hibiscus";
 import winterWonderlandParty from "./winter-wonderland-party";
+import bdModernArchSageBangla from "./bd-modern-arch-sage-bangla";
+import bdNokshaBorderIvory from "./bd-noksha-border-ivory";
+import bdPithaWinterUthsob from "./bd-pitha-winter-uthsob";
+import bdShankhaPolaRed from "./bd-shankha-pola-red";
+import eucalyptusGreeneryWedding from "./eucalyptus-greenery-wedding";
+import farewellBonVoyage from "./farewell-bon-voyage";
+import genderRevealHeOrShe from "./gender-reveal-he-or-she";
+import japaneseWashiCrane from "./japanese-washi-crane";
+import koreanHanbokPastel from "./korean-hanbok-pastel";
+import mexicanPapelPicado from "./mexican-papel-picado";
+import moodyDarkFlorals from "./moody-dark-florals";
+import mothersDayBrunchBloom from "./mothers-day-brunch-bloom";
+import pampasBohoWedding from "./pampas-boho-wedding";
+import retirementPartySunset from "./retirement-party-sunset";
+import rusticKraftBarn from "./rustic-kraft-barn";
+import spaceRocketBirthday from "./space-rocket-birthday";
+import superheroComicBirthday from "./superhero-comic-birthday";
+import tuscanVillaLemon from "./tuscan-villa-lemon";
+import unicornRainbowBirthday from "./unicorn-rainbow-birthday";
+import valentinesDinnerRose from "./valentines-dinner-rose";
 
 export type { TemplateDef } from "./kit";
 
@@ -169,6 +189,26 @@ const builders: (() => TemplateDef)[] = [
   summerBbqPicnic,
   tropicalLuauHibiscus,
   winterWonderlandParty,
+  bdModernArchSageBangla,
+  bdNokshaBorderIvory,
+  bdPithaWinterUthsob,
+  bdShankhaPolaRed,
+  eucalyptusGreeneryWedding,
+  farewellBonVoyage,
+  genderRevealHeOrShe,
+  japaneseWashiCrane,
+  koreanHanbokPastel,
+  mexicanPapelPicado,
+  moodyDarkFlorals,
+  mothersDayBrunchBloom,
+  pampasBohoWedding,
+  retirementPartySunset,
+  rusticKraftBarn,
+  spaceRocketBirthday,
+  superheroComicBirthday,
+  tuscanVillaLemon,
+  unicornRainbowBirthday,
+  valentinesDinnerRose,
 ];
 
 let cache: TemplateDef[] | null = null;
