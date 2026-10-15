@@ -61,3 +61,10 @@ export async function uploadImage(file: File): Promise<string> {
   const res = await api<{ url: string }>("/api/media", { method: "POST", body: form });
   return res.url;
 }
+
+/** Authenticated download (for CSV exports). */
+export async function apiBlob(path: string): Promise<Blob> {
+  const res = await fetch(path, { headers: await authHeaders() });
+  if (!res.ok) throw new ApiError(res.status, "Download failed");
+  return res.blob();
+}

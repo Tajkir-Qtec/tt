@@ -1,4 +1,5 @@
 import { HttpError, requireUser } from "@/lib/server/auth";
+import { getSettings } from "@/lib/server/settings";
 import { connectDB } from "@/lib/server/db";
 import { Media } from "@/lib/server/models";
 import { handle, json } from "@/lib/server/http";
@@ -28,7 +29,7 @@ export const POST = handle(async (req: Request) => {
   const mime = sniffImage(buf);
   if (!mime) throw new HttpError(400, "Please upload a JPG, PNG or WebP image");
   await connectDB();
-  if ((await Media.countDocuments({ ownerId: user.uid, kind: "upload" })) >= 300) {
+  if ((await Media.countDocuments({ ownerId: user.uid, kind: "upload" })) >= (await getSettings()).maxUploadsPerUser) {
     throw new HttpError(400, "Upload limit reached");
   }
   const media = await Media.create({ ownerId: user.uid, kind: "upload", mime, size: buf.length, data: buf });

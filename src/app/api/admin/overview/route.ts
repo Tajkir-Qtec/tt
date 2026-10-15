@@ -38,6 +38,12 @@ export const GET = handle(async (req: Request) => {
     return { day, views: s?.views ?? 0, signups: s?.signups ?? 0, cards: s?.cards ?? 0, published: s?.published ?? 0, rsvps: s?.rsvps ?? 0, reports: s?.reports ?? 0 };
   });
 
+  const [usersWithCards, usersWithLive, cardsWithReplies, activeToday] = await Promise.all([
+    Card.distinct("ownerId").then((a) => a.length),
+    Card.distinct("ownerId", { published: true }).then((a) => a.length),
+    Rsvp.distinct("cardId").then((a) => a.length),
+    AppUser.countDocuments({ lastSeen: { $gte: new Date(now - DAY) } }),
+  ]);
   const coming = rsvpAgg.find((r) => r._id === true);
   const declined = rsvpAgg.find((r) => r._id === false);
   return json({
@@ -60,6 +66,8 @@ export const GET = handle(async (req: Request) => {
       mediaBytes: mediaAgg[0]?.bytes ?? 0,
     },
     series,
+    funnel: { users, usersWithCards, usersWithLive, cardsWithReplies },
+    activeToday,
     templates: tplAgg.map((t) => ({ slug: t._id ?? "(blank canvas)", count: t.n })),
     topCards: topCards.map((c) => ({ id: String(c._id), title: c.title, slug: c.slug, views: c.views })),
     recent: recent.map((a) => ({

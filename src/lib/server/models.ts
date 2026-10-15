@@ -68,6 +68,8 @@ const appUserSchema = new Schema(
     lastSeen: { type: Date, default: Date.now },
     blocked: { type: Boolean, default: false },
     blockedReason: { type: String, default: "" },
+    /** Private admin note. */
+    note: { type: String, default: "", maxlength: 500 },
   },
   { timestamps: false },
 );
@@ -98,6 +100,11 @@ const reportSchema = new Schema(
   },
   { timestamps: { createdAt: true, updatedAt: false } },
 );
+
+const settingSchema = new Schema({
+  key: { type: String, required: true, unique: true },
+  value: { type: Schema.Types.Mixed, default: {} },
+});
 
 const dailyStatSchema = new Schema({
   day: { type: String, required: true, unique: true },
@@ -130,12 +137,13 @@ export interface CardFields {
 }
 export interface MediaFields { ownerId: string; kind: "upload" | "preview"; mime: string; size: number; data: Buffer; createdAt: Date }
 export interface RsvpFields { cardId: mongoose.Types.ObjectId; ownerId: string; attending: boolean; maybe?: boolean; name: string; phone: string; phoneKey: string; guests: number; fromLink: string }
-export interface AppUserFields { uid: string; email: string; name: string; firstSeen: Date; lastSeen: Date; blocked: boolean; blockedReason: string }
+export interface AppUserFields { uid: string; email: string; name: string; firstSeen: Date; lastSeen: Date; blocked: boolean; blockedReason: string; note?: string }
 export interface ActivityFields {
   at: Date; actorType: "user" | "admin" | "guest" | "system"; actorId: string; actorEmail: string; action: string;
   targetType: string; targetId: string; summary: string; meta: any; ip: string; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 export interface ReportFields { cardId: mongoose.Types.ObjectId; slug: string; reason: string; details: string; ip: string; status: string; handledBy: string; handledAt: Date | null; createdAt: Date }
+export interface SettingFields { key: string; value: any } // eslint-disable-line @typescript-eslint/no-explicit-any
 export interface DailyStatFields { day: string; views: number; signups: number; cards: number; published: number; rsvps: number; reports: number }
 
 type Stamped = { _id: mongoose.Types.ObjectId; createdAt: Date; updatedAt: Date };
@@ -153,3 +161,4 @@ export const AppUser = model<AppUserFields>("AppUser", appUserSchema);
 export const Activity = model<ActivityFields>("Activity", activitySchema);
 export const Report = model<ReportFields>("Report", reportSchema);
 export const DailyStat = model<DailyStatFields>("DailyStat", dailyStatSchema);
+export const Setting = model<SettingFields>("Setting", settingSchema);

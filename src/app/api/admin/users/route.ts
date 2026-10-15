@@ -12,11 +12,16 @@ export const GET = handle(async (req: Request) => {
   const q = (url.searchParams.get("q") ?? "").trim().slice(0, 60);
   const page = Math.max(1, Number(url.searchParams.get("page") ?? 1));
   const limit = 25;
-  const filter = q ? { $or: [{ email: new RegExp(esc(q), "i") }, { name: new RegExp(esc(q), "i") }, { uid: q }] } : {};
+  const status = url.searchParams.get("status") ?? "all";
+  const sort = url.searchParams.get("sort") === "firstSeen" ? "firstSeen" : "lastSeen";
+  const filter: Record<string, unknown> = q ? { $or: [{ email: new RegExp(esc(q), "i") }, { name: new RegExp(esc(q), "i") }, { uid: q }] } : {};
+  if (status === "blocked") filter.blocked = true;
+  if (status === "active") filter.lastSeen = { $gte: new Date(Date.now() - 7 * 86_400_000) };
+  if (status === "new") filter.firstSeen = { $gte: new Date(Date.now() - 7 * 86_400_000) };
   const [total, users] = await Promise.all([
     AppUser.countDocuments(filter),
     AppUser.find(filter)
-      .sort({ lastSeen: -1 })
+      .sort({ [sort]: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
       .lean(),
@@ -38,6 +43,7 @@ export const GET = handle(async (req: Request) => {
       lastSeen: u.lastSeen,
       blocked: u.blocked,
       blockedReason: u.blockedReason,
+      note: u.note ?? "",
       cards: cm.get(u.uid)?.cards ?? 0,
       published: cm.get(u.uid)?.published ?? 0,
       views: cm.get(u.uid)?.views ?? 0,

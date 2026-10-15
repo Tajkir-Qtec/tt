@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getSettings } from "@/lib/server/settings";
 import { connectDB } from "@/lib/server/db";
 import { Card, Rsvp } from "@/lib/server/models";
 import { handle, json } from "@/lib/server/http";
@@ -35,6 +36,7 @@ export const POST = handle(async (req: Request, ctx: RouteContext<"/api/public/[
   }
 
   await connectDB();
+  if (!(await getSettings()).rsvpOpen) throw new HttpError(503, "Replies are paused right now. Please try again later.");
   const card = await Card.findOne({ slug, published: true, adminHidden: { $ne: true } }).select("_id ownerId title rsvpEnabled");
   if (!card || card.rsvpEnabled === false) throw new HttpError(404, "Replies are not open for this card.");
   if ((await Rsvp.countDocuments({ cardId: card._id })) >= MAX_PER_CARD) throw new HttpError(400, "This card has reached its reply limit.");

@@ -78,3 +78,5 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.font-display { font-variant-numeric: lining-nums; }

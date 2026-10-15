@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { SiteBanner } from "@/components/site/SiteBanner";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -37,7 +38,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <SiteBanner />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

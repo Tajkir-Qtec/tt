@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { allCategories, categoryLabel } from "@/lib/categories";
 import Link from "next/link";
 import { ArrowRight, Check, Download, Globe2, LayoutTemplate, Link2, Palette, Smartphone, Sparkles } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
@@ -76,7 +77,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pb-24 lg:pt-20">
             <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/60 px-3.5 py-1.5 text-xs font-medium tracking-wide text-ink/70">
-                <span className="size-1.5 rounded-full bg-gold" /> Free digital wedding invitations
+                <span className="size-1.5 rounded-full bg-gold" /> Free digital invitations · weddings & celebrations
               </p>
               <h1 className="font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
                 Invitations your guests will <em className="text-brand">keep</em>.
@@ -90,6 +91,9 @@ export default function Home() {
                 </Link>
                 <Link href="/create" className="inline-flex h-12 items-center rounded-full border border-ink/15 bg-white/70 px-7 text-base font-medium transition hover:bg-white">
                   Design your own
+                </Link>
+                <Link href="/upload" className="inline-flex h-12 items-center rounded-full px-3 text-base font-medium text-brand underline-offset-4 hover:underline">
+                  Upload your card
                 </Link>
               </div>
               <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink/60">
@@ -139,6 +143,18 @@ export default function Home() {
           </div>
         </section>
 
+        {/* occasions */}
+        <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
+          <h2 className="mb-5 text-center text-sm font-medium uppercase tracking-[0.2em] text-ink/45">Browse by style &amp; occasion</h2>
+          <div className="flex flex-wrap justify-center gap-2">
+            {allCategories().map((c) => (
+              <Link key={c.slug} href={`/templates/category/${c.slug}`} className="rounded-full border border-line bg-white px-4 py-2 text-sm transition hover:border-brand hover:text-brand">
+                {categoryLabel(c.slug)} <span className="text-ink/35">{c.count}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* templates */}
         <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -178,6 +194,26 @@ export default function Home() {
                 <p className="mt-1 text-xs uppercase tracking-[0.3em] text-ink/50">request the pleasure of your company</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* upload */}
+        <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+          <div className="grid items-center gap-8 rounded-3xl border border-line bg-white p-8 sm:p-12 lg:grid-cols-[1.2fr_1fr]">
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">Already have a printed or designed card?</h2>
+              <p className="mt-4 max-w-xl text-lg text-ink/65">Upload a photo of it. We find the card, straighten and crop it, and turn it into a shareable invitation with personal links, a QR code and guest replies.</p>
+              <Link href="/upload" className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-ink px-7 text-base font-medium text-white transition hover:bg-ink/85">
+                Upload your card <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <ul className="grid gap-3 text-[15px] text-ink/70">
+              {["Auto-detects the card edges", "Straightens photos taken at an angle", "Colour clean-up for paper and print", "Add a guest-name line, envelope and QR"].map((x) => (
+                <li key={x} className="flex items-center gap-2.5">
+                  <Check className="size-4 shrink-0 text-gold" /> {x}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

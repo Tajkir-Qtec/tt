@@ -26,6 +26,34 @@ import royalPeacock from "./royal-peacock";
 import tropicalPalm from "./tropical-palm";
 import winterFrost from "./winter-frost";
 import punjabiPhulkari from "./punjabi-phulkari";
+import alponaRedIvoryGrand from "./alpona-red-ivory-grand";
+import anniversaryGoldenYears from "./anniversary-golden-years";
+import artDecoChampagne from "./art-deco-champagne";
+import babyShowerClouds from "./baby-shower-clouds";
+import banglaBiyeGold from "./bangla-biye-gold";
+import bangladeshiAkdEmerald from "./bangladeshi-akd-emerald";
+import bengaliShubhoBibaho from "./bengali-shubho-bibaho";
+import birthdayBalloonsBold from "./birthday-balloons-bold";
+import birthdayMilestoneGold from "./birthday-milestone-gold";
+import birthdayNeonNight from "./birthday-neon-night";
+import bridalShowerBlooms from "./bridal-shower-blooms";
+import dinnerPartyBotanical from "./dinner-party-botanical";
+import diwaliDiyaGlow from "./diwali-diya-glow";
+import doubleHappinessRed from "./double-happiness-red";
+import eidIftarLanterns from "./eid-iftar-lanterns";
+import engagementRingScript from "./engagement-ring-script";
+import firstBirthdayPastel from "./first-birthday-pastel";
+import gayeHoludTurmeric from "./gaye-holud-turmeric";
+import greekOliveSantorini from "./greek-olive-santorini";
+import moroccanZellige from "./moroccan-zellige";
+import nakshiKantha from "./nakshi-kantha";
+import persianGolTurquoise from "./persian-gol-turquoise";
+import pujaBoishakhFestive from "./puja-boishakh-festive";
+import scandiMinimalLine from "./scandi-minimal-line";
+import shaplaRiverBlush from "./shapla-river-blush";
+import southernAfricanWax from "./southern-african-wax";
+import terracottaTemple from "./terracotta-temple";
+import watercolorWildflower from "./watercolor-wildflower";
 
 export type { TemplateDef } from "./kit";
 
@@ -57,6 +85,34 @@ const builders: (() => TemplateDef)[] = [
   tropicalPalm,
   winterFrost,
   punjabiPhulkari,
+  alponaRedIvoryGrand,
+  anniversaryGoldenYears,
+  artDecoChampagne,
+  babyShowerClouds,
+  banglaBiyeGold,
+  bangladeshiAkdEmerald,
+  bengaliShubhoBibaho,
+  birthdayBalloonsBold,
+  birthdayMilestoneGold,
+  birthdayNeonNight,
+  bridalShowerBlooms,
+  dinnerPartyBotanical,
+  diwaliDiyaGlow,
+  doubleHappinessRed,
+  eidIftarLanterns,
+  engagementRingScript,
+  firstBirthdayPastel,
+  gayeHoludTurmeric,
+  greekOliveSantorini,
+  moroccanZellige,
+  nakshiKantha,
+  persianGolTurquoise,
+  pujaBoishakhFestive,
+  scandiMinimalLine,
+  shaplaRiverBlush,
+  southernAfricanWax,
+  terracottaTemple,
+  watercolorWildflower,
 ];
 
 let cache: TemplateDef[] | null = null;

@@ -24,6 +24,7 @@ export function SiteHeader() {
   const links = [
     { href: "/templates", label: "Templates" },
     { href: "/create", label: "Design your own" },
+    { href: "/upload", label: "Upload your card" },
   ];
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur-md">

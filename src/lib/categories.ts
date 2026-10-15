@@ -97,6 +97,48 @@ export const CATEGORY_INFO: Record<string, { label: string; h1: string; intro: s
     intro: "Invitations rooted in tradition — Bengali, Arab, Persian, Japanese and more.",
     keywords: ["cultural wedding invitation", "traditional wedding card", "ethnic wedding invitation template"],
   },
+  bengali: {
+    label: "Bengali & Bangladeshi",
+    h1: "Bengali Wedding Invitation Templates (বিয়ের কার্ড)",
+    intro: "Alpona, shapla, nakshi kantha and terracotta-inspired Bengali wedding cards — for Bangladeshi and West Bengal weddings, gaye holud, akd and bou bhat, with Bangla fonts built in.",
+    keywords: ["bengali wedding invitation", "bangladeshi wedding card", "bangla biye card template", "gaye holud invitation", "বিয়ের কার্ড"],
+  },
+  party: {
+    label: "Party",
+    h1: "Party Invitation Templates",
+    intro: "Beautiful digital invitations for dinners, celebrations and get-togethers — edit online and share by link with a personal greeting for every guest.",
+    keywords: ["party invitation template", "online party invitation", "digital invitation card", "celebration invitation"],
+  },
+  birthday: {
+    label: "Birthday",
+    h1: "Birthday Invitation Templates",
+    intro: "Balloons, gold milestones, first-birthday pastels and neon nights — customise the text, share a link, and let guests reply in a tap.",
+    keywords: ["birthday invitation template", "first birthday invitation", "digital birthday invite", "milestone birthday card"],
+  },
+  baby: {
+    label: "Baby Shower",
+    h1: "Baby Shower Invitation Templates",
+    intro: "Soft clouds, stars and gentle palettes for baby showers and welcome-baby celebrations.",
+    keywords: ["baby shower invitation", "baby shower invite template", "welcome baby invitation"],
+  },
+  engagement: {
+    label: "Engagement & Showers",
+    h1: "Engagement Party & Bridal Shower Invitations",
+    intro: "She said yes — invitations for engagement parties, ring ceremonies and bridal showers.",
+    keywords: ["engagement party invitation", "bridal shower invitation", "ring ceremony invitation card"],
+  },
+  anniversary: {
+    label: "Anniversary",
+    h1: "Anniversary Invitation Templates",
+    intro: "Silver, gold and golden-years designs for 25th, 50th and every anniversary celebration.",
+    keywords: ["anniversary invitation", "25th anniversary invitation", "50th anniversary party invite"],
+  },
+  festive: {
+    label: "Festive & Holidays",
+    h1: "Festive Invitation Templates — Eid, Diwali, Boishakh & more",
+    intro: "Lanterns, diyas and alpona borders for Eid, iftar, Diwali, Pohela Boishakh and seasonal gatherings.",
+    keywords: ["eid invitation card", "diwali party invitation", "iftar invitation template", "pohela boishakh invitation"],
+  },
 };
 
 export function allCategories(): { slug: string; count: number }[] {

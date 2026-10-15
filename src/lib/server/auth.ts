@@ -1,4 +1,5 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { getSettings } from "./settings";
 import { connectDB } from "./db";
 import { bumpStat, logActivity, clientIp } from "./activity";
 import { AppUser } from "./models";
@@ -71,11 +72,17 @@ const seen = new Map<string, { at: number; blocked: boolean }>();
 async function touchUser(user: AuthUser, req: Request) {
   const cached = seen.get(user.uid);
   const now = Date.now();
-  if (cached && now - cached.at < 60_000) {
+  if (cached && now - cached.at < 60_000 && !(await getSettings()).maintenance.on) {
     if (cached.blocked) throw new HttpError(403, "This account has been suspended. Contact support if you think this is a mistake.");
     return;
   }
   await connectDB();
+  const cfg = await getSettings();
+  if (!cached && !isAdmin(user) && (!cfg.signupsOpen || cfg.maintenance.on)) {
+    const exists = await AppUser.exists({ uid: user.uid });
+    if (!exists) throw new HttpError(403, cfg.signupsOpen ? cfg.maintenance.message : "New sign-ups are paused right now. Please check back soon.");
+  }
+  if (cfg.maintenance.on && !isAdmin(user)) throw new HttpError(503, cfg.maintenance.message);
   const res = await AppUser.findOneAndUpdate(
     { uid: user.uid },
     {

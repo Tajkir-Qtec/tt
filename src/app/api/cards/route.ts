@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getSettings } from "@/lib/server/settings";
 import { requireUser } from "@/lib/server/auth";
 import { connectDB } from "@/lib/server/db";
 import { Card, Rsvp, type CardDoc } from "@/lib/server/models";
@@ -45,8 +46,9 @@ export const POST = handle(async (req: Request) => {
   const user = await requireUser(req);
   const body = createSchema.parse(await req.json());
   await connectDB();
-  if ((await Card.countDocuments({ ownerId: user.uid })) >= 100) {
-    return json({ error: "You have reached the limit of 100 cards. Delete one to create another." }, 400);
+  const cap = (await getSettings()).maxCardsPerUser;
+  if ((await Card.countDocuments({ ownerId: user.uid })) >= cap) {
+    return json({ error: `You have reached the limit of ${cap} cards. Delete one to create another.` }, 400);
   }
   let design: CardDesign;
   let title = body.title ?? "My invitation";
